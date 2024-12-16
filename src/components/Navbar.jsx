@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { auth } from '../firebase/config';
+import { signOut } from 'firebase/auth';
 // import { Bounce, toast } from 'react-toastify';
 
 export const Navbar = () => {
@@ -8,6 +10,9 @@ export const Navbar = () => {
 
     const navigate = useNavigate();
     const handleLogout = () => {
+        signOut(auth).then(() => {
+            console.log("User Logged Out!");
+        })
         // toast(' Logout Successfull!', {
         //     position: "top-right",
         //     autoClose: 5000,
@@ -20,7 +25,6 @@ export const Navbar = () => {
         //     transition: Bounce,
         //     });
         // alert("Logging you out ! ")
-        localStorage.removeItem('userId');
         navigate("/");
     }
     return (
@@ -43,7 +47,7 @@ export const Navbar = () => {
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
-                                <NavLink to="/home" className={({ isActive }) => (isActive ? activeClass : inActiveClass)} aria-current="page">Policies</NavLink>
+                                <NavLink to="/allpolicies" className={({ isActive }) => (isActive ? activeClass : inActiveClass)} aria-current="page">Policies</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/workouts" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>comapare</NavLink>
