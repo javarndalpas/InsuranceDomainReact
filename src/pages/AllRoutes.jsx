@@ -9,6 +9,7 @@ import Signin from './Signin'
 import AgentDashboard from './AgentDashboard'
 import { Profile } from './profile'
 import { CheckoutPage } from './CheckoutPage'
+import { AddPolicies } from './AddPolicies'
 
 export const AllRoutes = () => {
     return (
@@ -19,6 +20,7 @@ export const AllRoutes = () => {
                 <Route path='/admin' element={<AdminDashboard />} />
                 <Route path='/agent' element={<AgentDashboard />} />
                 <Route path='/allpolicies' element={<AllPolicies />} />
+                <Route path='/addpolicies' element={<AddPolicies />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/signup' element={<Signup/>} />
                 <Route path='/checkout/:id' element={<CheckoutPage/>} />
