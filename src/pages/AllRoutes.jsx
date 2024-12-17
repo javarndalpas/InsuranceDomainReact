@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, } from 'react-router-dom'
 import { UserDashboard } from './UserDashboard'
 import { AdminDashboard } from './AdminDashboard'
 import { Home } from './Home'
@@ -12,6 +12,8 @@ import { CheckoutPage } from './CheckoutPage'
 import { AddPolicies } from './AddPolicies'
 
 export const AllRoutes = () => {
+
+ 
     return (
         <>
             <Routes>
@@ -22,9 +24,9 @@ export const AllRoutes = () => {
                 <Route path='/allpolicies' element={<AllPolicies />} />
                 <Route path='/addpolicies' element={<AddPolicies />} />
                 <Route path='/profile' element={<Profile />} />
-                <Route path='/signup' element={<Signup/>} />
-                <Route path='/checkout/:id' element={<CheckoutPage/>} />
-                <Route path='/' element={<Signin/>} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/checkout/:id' element={<CheckoutPage />} />
+                <Route path='/' element={<Signin />} />
             </Routes>
         </>
     )

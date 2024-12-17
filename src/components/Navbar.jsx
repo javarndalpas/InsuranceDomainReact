@@ -33,7 +33,7 @@ export const Navbar = () => {
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link to="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src="https://static.vecteezy.com/system/resources/previews/015/845/443/non_2x/fitness-tracker-for-fitness-equipment-fitness-tracker-icon-suitable-for-apps-website-developer-graphic-designer-needs-on-white-background-free-vector.jpg" className="h-8" alt=" Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Insurance Domain</span>
+                        <span className="self-center font-semibold whitespace-nowrap text-4xl text-blue-800 dark:text-white">Insurance Domain</span>
                     </Link>
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                         <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => handleLogout()}>Logout</button>
@@ -50,10 +50,10 @@ export const Navbar = () => {
                                 <NavLink to="/allpolicies" className={({ isActive }) => (isActive ? activeClass : inActiveClass)} aria-current="page">Policies</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/workouts" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>comapare</NavLink>
+                                <NavLink to="/user" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Dashboard</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/mydashboard" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Dashboard</NavLink>
+                                <NavLink to="/workouts" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>compare</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/profile" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>My profile</NavLink>

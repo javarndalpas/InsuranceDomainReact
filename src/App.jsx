@@ -4,6 +4,7 @@ import { UserDashboard } from './pages/UserDashboard'
 import { AllRoutes } from './pages/AllRoutes'
 import { Navbar } from './components/Navbar'
 import { useLocation } from 'react-router-dom'
+import { Footer } from './components/Footer'
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,9 @@ function App() {
           <Navbar />
         )}
         <AllRoutes />
+        {location.pathname !== '/' && location.pathname !== '/signup' && (
+          <Footer />
+        )}
       </div>
     </>
   )
