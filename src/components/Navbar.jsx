@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { auth } from '../firebase/config';
 import { signOut } from 'firebase/auth';
-// import { Bounce, toast } from 'react-toastify';
 
 export const Navbar = () => {
     const activeClass = "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 ";
@@ -13,18 +12,6 @@ export const Navbar = () => {
         signOut(auth).then(() => {
             console.log("User Logged Out!");
         })
-        // toast(' Logout Successfull!', {
-        //     position: "top-right",
-        //     autoClose: 5000,
-        //     hideProgressBar: false,
-        //     closeOnClick: true,
-        //     pauseOnHover: true,
-        //     draggable: true,
-        //     progress: undefined,
-        //     theme: "dark",
-        //     transition: Bounce,
-        //     });
-        // alert("Logging you out ! ")
         navigate("/");
     }
     return (
@@ -56,13 +43,15 @@ export const Navbar = () => {
                                 <NavLink to="/workouts" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>compare</NavLink>
                             </li>
                             <li>
+                                <NavLink to="/allusers" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>All Users</NavLink>
+                            </li>
+                            <li>
                                 <NavLink to="/profile" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>My profile</NavLink>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-
         </>
     )
 }

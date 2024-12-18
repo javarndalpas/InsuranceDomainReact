@@ -13,7 +13,6 @@ function App() {
     }
   }, [location]);
 
-
   return (
     <>
       <div className='mt-20'>

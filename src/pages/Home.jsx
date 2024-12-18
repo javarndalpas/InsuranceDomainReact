@@ -19,14 +19,16 @@ export const Home = () => {
     }
     getPolicies()
   }, [])
-
   return (
     <div>
       <div className="px-4 py-6">
-        <div className='text-center'>
-        <img src="https://i.pinimg.com/736x/c4/db/46/c4db462506660b4eb57998b85bed6c07.jpg" alt="" />
-        </div>
-
+      <div className="home_container relative bg-white h-[700px]">
+        <img src="https://img.lovepik.com/background/20211021/large/lovepik-blue-banner-posters-background-image_500361605.jpg" alt="" />
+        <p className="absolute italic text-blue-100 text-4xl font-bold top-[250px] left-[250px]">
+        Buy LIC plans tailored for you!
+        </p>
+        <p className="absolute text-blue-100 italic text-4xl font-bold top-[350px] left-[250px]">Discover insurance plans as per your needs</p>
+      </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {policies.length > 0 ? (
             policies.map((policy) => (

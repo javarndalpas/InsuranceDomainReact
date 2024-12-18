@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { db } from '../firebase/config'; // Firestore instance
-import { doc, setDoc } from 'firebase/firestore'; // Firestore methods
+import { db } from '../firebase/config';
+import { doc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { auth } from '../firebase/config';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,8 +8,9 @@ import { Link, useNavigate } from 'react-router-dom';
 export const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user'); // Default role is 'user'
+  const [role, setRole] = useState('user');
   const [error, setError] = useState('');
+  const[uname, setUname] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
@@ -21,14 +22,17 @@ export const Signup = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      console.log(user)
 
-      const userRoleRef = doc(db, 'roles', user.uid); 
+      const userRoleRef = doc(db, 'roles', user.uid);
       await setDoc(userRoleRef, {
-        role: role, 
+        role: role,
+        email: user.email,
+        name: uname
       });
 
       alert('Signup successful!');
-      history("/signin")
+      history("/")
     } catch (error) {
       setError(error.message);
     } finally {
@@ -42,6 +46,18 @@ export const Signup = () => {
         <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Create an Account</h2>
 
         <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600" htmlFor="email">Enter Full Name</label>
+            <input
+              type="text"
+              id="name"
+              value={uname}
+              onChange={(e) => setUname(e.target.value)}
+              required
+              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-600" htmlFor="email">Email</label>
             <input
@@ -65,7 +81,7 @@ export const Signup = () => {
               className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          
+
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-600" htmlFor="role">Role</label>
             <select
@@ -82,7 +98,7 @@ export const Signup = () => {
           </div>
 
           {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
-          <p>Already have an account <Link to="/signin"  className='text-blue-500' >signin</Link > </p>
+          <p>Already have an account <Link to="/signin" className='text-blue-500' >signin</Link > </p>
           <button
             type="submit"
             disabled={loading}

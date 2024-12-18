@@ -21,7 +21,7 @@ const Signin = () => {
             const user = userCredential.user;
             console.log('User signed in:', user.uid);
 
-            // Get the user's role from Firestore using their UID
+           
             const docRef = doc(db, 'roles', user.uid);
             const docSnap = await getDoc(docRef);
 
@@ -30,7 +30,6 @@ const Signin = () => {
                 const userRole = userData.role;
                 console.log('User role:', userRole);
 
-              
                 if (userRole === 'admin') {
                     history('/admin');
                 } else if (userRole === 'agent') {

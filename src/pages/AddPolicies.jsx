@@ -13,12 +13,13 @@ export const AddPolicies = () => {
   const [type, setType] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [claim, setClaim] = useState('false');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate that all required fields are filled
-    if (!description || !category  || !coverage || !name || !price || !type) {
+    if (!description || !category || !coverage || !name || !price || !type) {
       setError('All fields are required.');
       return;
     }
@@ -31,6 +32,7 @@ export const AddPolicies = () => {
         name,
         price,
         type,
+        claim,
         createdAt: new Date(),
       });
       setDescription('');
@@ -40,6 +42,7 @@ export const AddPolicies = () => {
       setPrice('');
       setType('');
       setError('');
+      setClaim('false')
       setSuccess('Policy added successfully!');
       navigate('/allpolicies')
     } catch (error) {
@@ -50,12 +53,9 @@ export const AddPolicies = () => {
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-md">
       <h1 className="text-3xl font-semibold text-center mb-6">Add Policy</h1>
-
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       {success && <p className="text-green-500 text-center mb-4">{success}</p>}
-
       <form onSubmit={handleSubmit} className="space-y-6">
-
         <div>
           <label htmlFor="name" className="block text-lg font-medium text-gray-700">Policy Name:</label>
           <input
@@ -77,7 +77,7 @@ export const AddPolicies = () => {
             className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        
+
         <div>
           <label htmlFor="category" className="block text-lg font-medium text-gray-700">Category:</label>
           <select
@@ -118,6 +118,20 @@ export const AddPolicies = () => {
             className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+        <div>
+          <label htmlFor="claim" className="block text-lg font-medium text-gray-700">Claim:</label>
+          <select
+            id="claim"
+            value={claim}
+            onChange={(e) => setClaim(e.target.value)}
+            required
+            className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
+        </div>
+
 
         <div>
           <label htmlFor="type" className="block text-lg font-medium text-gray-700">Policy Type:</label>
