@@ -1,31 +1,51 @@
 /* eslint-disable no-unused-vars */
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { auth, db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 
 export const AllUsers = () => {
     const [users, setUsers] = useState([]);
-    const [currentUser, setCurrentUser] = useState(null); 
+    const [currentUser, setCurrentUser] = useState(null);
+    const [myUserRole, setMyUserRole] = useState("");
     const usersRef = collection(db, "roles");
     const navigate = useNavigate();
 
     useEffect(() => {
         setCurrentUser(auth.currentUser);
+        //  console.log(currentUser.uid,"")
         const getUsers = async () => {
             try {
                 const querySnapshot = await getDocs(usersRef);
                 const userList = querySnapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
+
                 }));
-                setUsers(userList);
+                if (myUserRole === 'admin') {
+                    setUsers(userList)
+                }
+                else {
+                    setUsers(userList.filter((el) => el.role == 'user'));
+                }
+                // console.log(userList.filter((el)=>el.role == 'user'),"userList");
             } catch (err) {
                 console.error("Error fetching users:", err);
             }
         };
+        const getRoles = async () => {
+            const docRef = doc(db, "roles", currentUser.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                const userRole = userData.role;
+                setMyUserRole(userRole);
+                console.log("User role:----->all", userRole);
+            }
+        };
+        getRoles()
         getUsers();
-    }, []);
+    }, [users]);
 
     const handleUserDetails = (id) => {
         navigate(`/userdetails/${id}`);
@@ -64,16 +84,17 @@ export const AllUsers = () => {
                                 >
                                     View Details
                                 </button>
-                                <button
-                                    type="button"
-                                    disabled={currentUser?.uid === user.id} // Disable if the logged-in user matches
-                                    className={`text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ${
-                                        currentUser?.uid === user.id ? "opacity-50 cursor-not-allowed" : ""
-                                    }`}
-                                    onClick={() => handleUserDelete(user.id)}
-                                >
-                                    Delete
-                                </button>
+                                {myUserRole === 'admin' &&
+                                    <button
+                                        type="button"
+                                        disabled={currentUser?.uid === user.id}
+                                        className={`text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ${currentUser?.uid === user.id ? "opacity-50 cursor-not-allowed" : ""
+                                            }`}
+                                        onClick={() => handleUserDelete(user.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                }
                             </div>
                         </div>
                     ))

@@ -30,9 +30,9 @@ const Signin = () => {
                 console.log('User role:', userRole);
 
                 if (userRole === 'admin') {
-                    history('/admin');
+                    history('/allusers');
                 } else if (userRole === 'agent') {
-                    history('/agent');
+                    history('/allusers');
                 } else {
                     history('/user');
                 }

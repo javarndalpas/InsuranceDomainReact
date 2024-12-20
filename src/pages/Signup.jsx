@@ -98,7 +98,7 @@ export const Signup = () => {
           </div>
 
           {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
-          <p>Already have an account <Link to="/signin" className='text-blue-500' >signin</Link > </p>
+          <p>Already have an account <Link to="/" className='text-blue-500' >signin</Link > </p>
           <button
             type="submit"
             disabled={loading}

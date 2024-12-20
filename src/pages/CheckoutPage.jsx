@@ -1,6 +1,6 @@
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../firebase/config';
 import { auth } from '../firebase/config';
 
@@ -14,6 +14,7 @@ export const CheckoutPage = () => {
     const [cardHolderName, setCardHolderName] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
+    const navigate = useNavigate();
 
 
     const userId = auth.currentUser.uid;
@@ -79,7 +80,6 @@ export const CheckoutPage = () => {
 
             const policyRef = doc(db, 'policies', id);
             const policyDoc = await getDoc(policyRef);
-
             if (!policyDoc.exists()) {
                 console.log('No such policy!');
                 return;
@@ -101,7 +101,8 @@ export const CheckoutPage = () => {
                     ? [...userRoleDoc.data().purchasedPolicies, policyPurchase]
                     : [policyPurchase],
             });
-
+            alert("Policy Purchased Successfully")
+            navigate('/user')
             console.log('Purchase successfully added to user document!');
         } catch (error) {
             console.log('Error processing purchase:', error);

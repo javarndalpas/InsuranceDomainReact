@@ -25,10 +25,10 @@ export const Home = () => {
       <div className="home_container relative bg-white h-[700px]">
         <img src="https://img.lovepik.com/background/20211021/large/lovepik-blue-banner-posters-background-image_500361605.jpg" alt="" />
         <p className="absolute italic text-blue-100 text-4xl font-bold top-[250px] left-[250px]">
-        Buy LIC plans tailored for you!
+        Buy Insurance plans tailored for you!
         </p>
         <p className="absolute text-blue-100 italic text-4xl font-bold top-[350px] left-[250px]">Discover insurance plans as per your needs</p>
-      </div>
+      </div>  
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {policies.length > 0 ? (
             policies.map((policy) => (
@@ -41,7 +41,6 @@ export const Home = () => {
                 <button type="button" className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Buy</button>
                 <button type="button" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add to Compare</button>
                 <button type="button" className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Review</button>
-
               </div>
             ))
           ) : (

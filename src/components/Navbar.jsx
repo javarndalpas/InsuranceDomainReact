@@ -12,7 +12,6 @@ export const Navbar = () => {
 
   const getRoles = async () => {
     const docRef = doc(db, "roles", user.uid);
-
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const userData = docSnap.data();
@@ -21,7 +20,6 @@ export const Navbar = () => {
       console.log("User role:", userRole);
     }
   };
-
   useEffect(() => {
     getRoles();
   }, []);
@@ -93,6 +91,17 @@ export const Navbar = () => {
             id="navbar-sticky"
           >
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+
+              < li >
+                <NavLink
+                  to="/Home"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : inActiveClass
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/allpolicies"
@@ -126,7 +135,7 @@ export const Navbar = () => {
                   compare
                 </NavLink>
               </li> */}
-              {myUserRole == "admin" && (
+              {myUserRole != 'user' && (
                 <li>
                   <NavLink
                     to="/allusers"
@@ -134,10 +143,16 @@ export const Navbar = () => {
                       isActive ? activeClass : inActiveClass
                     }
                   >
-                    All Users
+                    {(myUserRole === 'agent') ?
+
+                      ( <span>Agent Dashboard</span> )
+                      :
+                      ( <span>Admin Dashboard</span>)
+                    }
                   </NavLink>
                 </li>
               )}
+
               <li>
                 <NavLink
                   to="/profile"
@@ -151,7 +166,7 @@ export const Navbar = () => {
             </ul>
           </div>
         </div>
-      </nav>
+      </nav >
     </>
   );
 };

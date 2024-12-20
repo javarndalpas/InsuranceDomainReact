@@ -77,7 +77,6 @@ export const AddPolicies = () => {
             className="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-
         <div>
           <label htmlFor="category" className="block text-lg font-medium text-gray-700">Category:</label>
           <select
@@ -131,8 +130,6 @@ export const AddPolicies = () => {
             <option value="true">True</option>
           </select>
         </div>
-
-
         <div>
           <label htmlFor="type" className="block text-lg font-medium text-gray-700">Policy Type:</label>
           <select
