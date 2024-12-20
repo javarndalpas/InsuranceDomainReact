@@ -1,31 +1,23 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import { UserDashboard } from './pages/UserDashboard'
-import { AllRoutes } from './pages/AllRoutes'
-import { Navbar } from './components/Navbar'
-import { useLocation } from 'react-router-dom'
-import { Footer } from './components/Footer'
+import { useEffect } from 'react';
+import './App.css';
+import { AllRoutes } from './pages/AllRoutes';
+import { Navbar } from './components/Navbar';
+import { useLocation } from 'react-router-dom';
+import { Footer } from './components/Footer';
 
 function App() {
   const location = useLocation();
-  useEffect(() => {
-    if (location.pathname === "/") {
-    }
-  }, [location]);
+  const showNavbarAndFooter = location.pathname !== '/' && location.pathname !== '/signup';
+
+  // Removed empty useEffect block, as it wasn't serving any purpose.
 
   return (
-    <>
-      <div className='mt-20'>
-      {location.pathname !== '/' && location.pathname !== '/signup' && (
-          <Navbar />
-        )}
-        <AllRoutes />
-        {location.pathname !== '/' && location.pathname !== '/signup' && (
-          <Footer />
-        )}
-      </div>
-    </>
-  )
+    <div className="mt-20">
+      {showNavbarAndFooter && <Navbar />}
+      <AllRoutes />
+      {showNavbarAndFooter && <Footer />}
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -44,6 +44,10 @@ export const UserDetails = () => {
     return <div>{error}</div>; 
   }
 
+  const handleApprovedClaims = () =>{
+
+  }
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold text-center mb-4 text-blue-800">User Details</h1>
@@ -66,6 +70,11 @@ export const UserDetails = () => {
               <p><strong>Policy Name:</strong> {policy.name}</p>
               <p><strong>Category:</strong> {policy.category}</p>
               <p><strong>Price:</strong> ${policy.price}</p>
+             { (policy.claim == true)
+             ?
+              <button type="button" onClick={()=>handleApprovedClaims()} className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Approve Claim</button>
+              :"bbb"
+             }
             </div>
           ))}
         </div>

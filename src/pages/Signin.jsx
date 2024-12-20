@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { auth, db } from '../firebase/config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -20,8 +21,6 @@ const Signin = () => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             console.log('User signed in:', user.uid);
-
-           
             const docRef = doc(db, 'roles', user.uid);
             const docSnap = await getDoc(docRef);
 
@@ -53,7 +52,6 @@ const Signin = () => {
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Sign In</h2>
-
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600" htmlFor="email">Email</label>
