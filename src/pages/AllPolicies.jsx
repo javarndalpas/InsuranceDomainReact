@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { auth, db } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
@@ -49,6 +49,23 @@ export const AllPolicies = () => {
     console.log(id);
     navigate(`/checkout/${id}`);
   };
+
+
+  const handleDeletePolicy = async (id) => {
+    const confirmed = window.confirm("Are you sure you want to delete this Policy?");
+    if (confirmed) {
+        try {
+            const policyDocRef = doc(db, "policies", id);
+            await deleteDoc(policyDocRef);
+            // setUsers(users.filter((user) => user.id !== id));
+            alert("Policy deleted successfully");
+        } catch (err) {
+            console.error("Error deleting Policy:", err);
+            alert("Error deleting Policy");
+        }
+    }
+};
+
   return (
     <div>
       <div className=" py-4">
@@ -78,18 +95,20 @@ export const AllPolicies = () => {
                 <p className="text-gray-700"> <strong>Coverage:</strong> {policy.coverage}</p>
                 <p className="text-gray-700"> <strong>Price:</strong> ${policy.price}</p>
 
-                {myUserRole == 'user' &&
-                  < button
+                {myUserRole == 'user' ?
+                  (< button
                     type="button"
                     className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                    onClick={() => handleCheckout(policy.id)}  > Buy  </button>
+                    onClick={() => handleCheckout(policy.id)}  > Buy  </button>)
+                  :
+                  (<button
+                    onClick={() => handleDeletePolicy(policy.id)}
+                    type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Delete</button>
+                  )
                 }
-                <button
-                  type="button"
-                  className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                >
-                  Review
-                </button>
+                <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Review</button>
+
+
               </div>
             ))
           ) : (

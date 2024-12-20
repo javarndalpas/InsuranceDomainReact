@@ -96,7 +96,7 @@ export const UserDetails = () => {
 
       {policies.length > 0 ? (
         <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-4 bg-black text-white py-4">All the Purchased Policies</h2>
+          <h2 className="text-xl font-semibold mb-4 bg-black text-white py-4">All the Purchased Policies of this user</h2>
           {policies.map((policy, index) => (
             <div key={index} className="bg-white p-4 mb-4 rounded-lg shadow-md">
               <p><strong>Policy Name:</strong> {policy.name}</p>
@@ -109,7 +109,8 @@ export const UserDetails = () => {
                 (policy.claim == true && policy.clamApproval == true ?
                   (<button type="button" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Successfully Approved</button>
                   ) : (
-                    <button type="button" class="text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center" disabled>Customer has't asked for claimed yet</button>)
+                    <button type="button" class="text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center" disabled>Customer has't asked for claimed yet</button>
+                  )
                 )
               }
             </div>
