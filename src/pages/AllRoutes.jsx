@@ -7,7 +7,7 @@ import { AllPolicies } from "./AllPolicies";
 import { Signup } from "./Signup";
 import Signin from "./Signin";
 import AgentDashboard from "./AgentDashboard";
-import { Profile } from "./profile";
+import { Profile } from "./Profile";
 import { CheckoutPage } from "./CheckoutPage";
 import { AddPolicies } from "./AddPolicies";
 import { AllUsers } from "./AllUsers";
